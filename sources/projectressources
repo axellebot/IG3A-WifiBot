@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/image">
+        <file>img/arrow-down-bold-box-outline.png</file>
+        <file>img/arrow-down-bold-box.png</file>
+        <file>img/arrow-left-bold-box-outline.png</file>
+        <file>img/arrow-left-bold-box.png</file>
+        <file>img/arrow-right-bold-box-outline.png</file>
+        <file>img/arrow-right-bold-box.png</file>
+        <file>img/arrow-up-bold-box-outline.png</file>
+        <file>img/arrow-up-bold-box.png</file>
+        <file>img/rotate-left.png</file>
+        <file>img/rotate-right.png</file>
+    </qresource>
+</RCC>
