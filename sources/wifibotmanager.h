@@ -28,7 +28,8 @@ class WifiBotManager : public QObject
 
 private :
     // Cameras
-    QNetworkAccessManager *camera;
+    QNetworkRequest request;
+    QNetworkAccessManager *manager;
 
     // Connections
     QByteArray sendBuffer;

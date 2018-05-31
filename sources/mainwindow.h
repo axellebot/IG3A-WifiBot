@@ -85,11 +85,19 @@ private slots:
     // Camera
     void on_btnCameraTiltUp_pressed();
 
+    void on_btnCameraTiltUp_released();
+
     void on_btnCameraTiltDown_pressed();
+
+    void on_btnCameraTiltDown_released();
 
     void on_btnCameraPanLeft_pressed();
 
+    void on_btnCameraPanLeft_released();
+
     void on_btnCameraPanRight_pressed();
+
+    void on_btnCameraPanRight_released();
 
     void on_sliderSpeed_valueChanged(int value);
 

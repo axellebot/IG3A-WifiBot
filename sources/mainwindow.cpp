@@ -118,22 +118,46 @@ void MainWindow::on_btnMoveRotateRight_released()
 
 void MainWindow::on_btnCameraTiltUp_pressed()
 {
-    qDebug( "Camera Tilt Up" );
+    qDebug( "Camera Tilt Up Pressed" );
+    cameraTiltUp = true;
 }
+
+void MainWindow::on_btnCameraTiltUp_released()
+ {
+     qDebug( "Camera Tilt Up Released");
+     cameraTiltUp = false;
+ }
 
 void MainWindow::on_btnCameraTiltDown_pressed()
 {
-    qDebug( "Camera Tilt Down" );
+    qDebug( "Camera Tilt Down Pressed");
+    cameraTiltDown = true;
+}
+
+void MainWindow::on_btnCameraTiltDown_released(){
+    qDebug( "Camera Tilt Down Released");
+    cameraTiltDown = false;
 }
 
 void MainWindow::on_btnCameraPanLeft_pressed()
 {
-    qDebug( "Camera Rotate Left" );
+    qDebug( "Camera Rotate Left Pressed");
+    cameraPanLeft = true;
 }
 
-void MainWindow::on_btnCameraPanRight_pressed()
-{
-    qDebug( "Camera Rotate Right" );
+void MainWindow::on_btnCameraPanLeft_released(){
+    qDebug( "Camera Rotate Left Released" );
+    cameraPanLeft = false;
+}
+
+void MainWindow::on_btnCameraPanRight_pressed(){
+    qDebug( "Camera Rotate Right Pressed" );
+    cameraPanRight=true;
+}
+
+void MainWindow::on_btnCameraPanRight_released(){
+    qDebug( "Camera Rotate Right Released" );
+    cameraPanRight=false;
 }
 
 void MainWindow::on_sliderSpeed_valueChanged(int value)

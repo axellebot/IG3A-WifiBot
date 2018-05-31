@@ -8,10 +8,13 @@ WifiBotManager::WifiBotManager(QObject *parent):
     timer = new QTimer();
     timer->setInterval(INTERVAL_SYNC);
     connect(timer, SIGNAL(timeout()), this, SLOT(tick()));
+
+    manager = new QNetworkAccessManager();
+
 }
 
 WifiBotManager::~WifiBotManager(){
-    delete camera;
+    delete manager;
     delete timer;
 }
 
@@ -70,26 +73,29 @@ void WifiBotManager::tick(){
 }
 
 void WifiBotManager::genMessage(){
-    /*// If Camera is connected
-    if(camera){
+    if(cameraConnected){
         if(cameraTiltUp){
-            QUrl url("http://"+ ipAddress +":" +cameraPortAddress+ "?"+PARAM_CAMERA_UP);
-            camera->get(QNetworkRequest(url));
+            QUrl url("http://"+ ipAddress +":" +QString::number(cameraPortAddress)+ "?"+PARAM_CAMERA_UP);
+            request.setUrl(url);
+            manager->get(request);
         }
         else if(cameraTiltDown){
-            QUrl url("http://" + ipAddress +":" +cameraPortAddress +  "?" + PARAM_CAMERA_DOWN);
-            camera->get(QNetworkRequest(url));
+            QUrl url("http://" + ipAddress +":" +QString::number(cameraPortAddress) +  "?" + PARAM_CAMERA_DOWN);
+            request.setUrl(url);
+            manager->get(request);
         }
         else if(cameraPanLeft){
-            QUrl url("http://" + ipAddress+":" +cameraPortAddress +  "?" + PARAM_CAMERA_LEFT);
-            camera->get(QNetworkRequest(url));
+            QUrl url("http://" + ipAddress+":" +QString::number(cameraPortAddress) +  "?" + PARAM_CAMERA_LEFT);
+            request.setUrl(url);
+            manager->get(request);
         }
         else if(cameraPanRight){
-            QUrl url("http://" + ipAddress+":" +cameraPortAddress +  "?" + PARAM_CAMERA_RIGHT);
-            camera->get(QNetworkRequest(url));
+            QUrl url("http://" + ipAddress+":" +QString::number(cameraPortAddress) +  "?" + PARAM_CAMERA_RIGHT);
+            request.setUrl(url);
+            manager->get(request);
         }
     }
-    */
+
     sendBuffer.clear();
     /*
     sendBuffer.append((char)0xff);
@@ -165,6 +171,7 @@ void WifiBotManager::genMessage(){
         sendBuffer.append((char)0b01010000);
         */
 
+    sendBuffer.append((char)255); // needed
     sendBuffer.append((char)0x09);
     sendBuffer.append((char)0xff);
     sendBuffer.append((char)0x00);
@@ -175,7 +182,6 @@ void WifiBotManager::genMessage(){
     sendBuffer.append((char)crc);
     sendBuffer.append((char)crc>>8);
     sendBuffer.prepend((char)0xff);
-
 }
 
 void WifiBotManager::sendMessage(){
