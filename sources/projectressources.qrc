@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/image">
+    <qresource prefix="/">
         <file>img/arrow-down-bold-box-outline.png</file>
         <file>img/arrow-down-bold-box.png</file>
         <file>img/arrow-left-bold-box-outline.png</file>

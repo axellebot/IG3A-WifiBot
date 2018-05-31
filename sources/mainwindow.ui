@@ -45,28 +45,84 @@
      <item row="2" column="0">
       <widget class="QPushButton" name="btnCameraPanLeft">
        <property name="text">
-        <string>left</string>
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normalon>:/img/rotate-left.png</normalon>
+        </iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
      <item row="1" column="1">
       <widget class="QPushButton" name="btnCameraTiltUp">
        <property name="text">
-        <string>up</string>
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="projectressources.qrc">
+         <normaloff>:/img/arrow-up-bold-box-outline.png</normaloff>
+         <normalon>:/img/arrow-up-bold-box.png</normalon>:/img/arrow-up-bold-box-outline.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
      <item row="2" column="1">
       <widget class="QPushButton" name="btnCameraTiltDown">
        <property name="text">
-        <string>down</string>
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="projectressources.qrc">
+         <normaloff>:/img/arrow-down-bold-box-outline.png</normaloff>
+         <normalon>:/img/arrow-down-bold-box.png</normalon>:/img/arrow-down-bold-box-outline.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
      <item row="2" column="2">
       <widget class="QPushButton" name="btnCameraPanRight">
        <property name="text">
-        <string>right</string>
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normalon>:/img/rotate-right.png</normalon>
+        </iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>45</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -150,8 +206,8 @@
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>180</y>
+      <x>30</x>
+      <y>240</y>
       <width>373</width>
       <height>188</height>
      </rect>
@@ -198,16 +254,21 @@
         <string notr="true"/>
        </property>
        <property name="icon">
-        <iconset>
-         <normalon>img/arrow-up-bold-box-outline.png</normalon>
-         <selectedon>img/arrow-up-bold-box.png</selectedon>
-        </iconset>
+        <iconset resource="projectressources.qrc">
+         <normaloff>:/img/arrow-up-bold-box-outline.png</normaloff>
+         <normalon>:/img/arrow-up-bold-box.png</normalon>:/img/arrow-up-bold-box-outline.png</iconset>
        </property>
        <property name="iconSize">
         <size>
          <width>45</width>
          <height>45</height>
         </size>
+       </property>
+       <property name="shortcut">
+        <string notr="true">Up</string>
+       </property>
+       <property name="default">
+        <bool>false</bool>
        </property>
        <property name="flat">
         <bool>true</bool>
@@ -221,8 +282,8 @@
        </property>
        <property name="icon">
         <iconset>
-         <normalon>img/arrow-down-bold-box-outline.png</normalon>
-         <selectedon>img/arrow-down-bold-box.png</selectedon>
+         <normalon>:/img/arrow-down-bold-box-outline.png</normalon>
+         <selectedon>:/img/arrow-down-bold-box.png</selectedon>
         </iconset>
        </property>
        <property name="iconSize">
@@ -230,6 +291,9 @@
          <width>45</width>
          <height>45</height>
         </size>
+       </property>
+       <property name="shortcut">
+        <string>Down</string>
        </property>
        <property name="flat">
         <bool>true</bool>
@@ -243,7 +307,7 @@
        </property>
        <property name="icon">
         <iconset>
-         <normalon>img/rotate-left.png</normalon>
+         <normalon>:/img/rotate-left.png</normalon>
         </iconset>
        </property>
        <property name="iconSize">
@@ -251,6 +315,9 @@
          <width>45</width>
          <height>45</height>
         </size>
+       </property>
+       <property name="shortcut">
+        <string>Left</string>
        </property>
        <property name="flat">
         <bool>true</bool>
@@ -264,7 +331,7 @@
        </property>
        <property name="icon">
         <iconset>
-         <normalon>img/rotate-right.png</normalon>
+         <normalon>:/img/rotate-right.png</normalon>
         </iconset>
        </property>
        <property name="iconSize">
@@ -272,6 +339,9 @@
          <width>45</width>
          <height>45</height>
         </size>
+       </property>
+       <property name="shortcut">
+        <string>Right</string>
        </property>
        <property name="flat">
         <bool>true</bool>
@@ -333,6 +403,8 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="projectressources.qrc"/>
+ </resources>
  <connections/>
 </ui>

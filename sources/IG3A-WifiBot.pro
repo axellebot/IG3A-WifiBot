@@ -28,7 +28,7 @@ FORMS    += mainwindow.ui \
 DISTFILES +=
 
 RESOURCES += \
-    projectressources
+    projectressources.qrc
 
 message("OpenCV path: $$OPENCV_PATH")
 message("Includes path: $$INCLUDEPATH")
