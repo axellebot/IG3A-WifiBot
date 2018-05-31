@@ -7,12 +7,14 @@ MainWindow::MainWindow(QWidget *parent):
     ui->setupUi(this);
 
     manager = new WifiBotManager(this);
-    timer = new QTimer();
-    timer->setInterval(INTERVAL_SYNC);
-    connect(timer, SIGNAL(timeout()), this, SLOT(syncData()));
-    timer->start();
+
     resetMovesSatements();
     initComponents();
+
+    timer = new QTimer();
+    connect(timer, SIGNAL(timeout()), this, SLOT(syncData()));
+    timer->setInterval(INTERVAL_SYNC);
+    timer->start();
 }
 
 MainWindow::~MainWindow()
@@ -20,6 +22,10 @@ MainWindow::~MainWindow()
     delete ui;
     delete manager;
     delete timer;
+    delete cameraView;
+    delete backwardSensor;
+    delete forewardSensor;
+    delete battery;
 }
 
 void MainWindow::resetMovesSatements(){
@@ -37,10 +43,11 @@ void MainWindow::resetMovesSatements(){
 void MainWindow::initComponents()
 {
     // mainToolBar
+    ui->toolBar->addWidget(new QLabel("Battery"));
     battery = new QProgressBar();
     battery->setFormat("%p%");
-    ui->toolBar->addWidget(battery);
 
+    ui->toolBar->addWidget(battery);
     ui->toolBar->addSeparator();
 
     forewardSensor = new QRadioButton();
@@ -53,9 +60,9 @@ void MainWindow::initComponents()
     ui->toolBar->addSeparator();
 
     // Camera
-    //cam = new Camera(this->ui);
-    //ui->dockWidgetCamera->setVisible(false);
-    //ui->dockWidgetCamera->setMinimumHeight(325);
+    cameraView= new QWebEngineView();
+
+    ui->frameLayout->addWidget(cameraView);
 
     setInterfaceEnabled(false);
 }
@@ -169,6 +176,9 @@ Ui::MainWindow *MainWindow::getUI()
 }
 
 void MainWindow::syncData(){
+    /*
+     * Push Datas
+     */
     // Moves
     manager->speed=ui->sliderSpeed->value();
     manager->moveForward=this->moveForward;
@@ -183,10 +193,21 @@ void MainWindow::syncData(){
     manager->cameraPanLeft=this->cameraPanLeft;
     manager->cameraPanRight=this->cameraPanRight;
 
+
+    /*
+     * Pull Datas
+     */
     if(manager->connected){
         battery->setValue(manager->batterySensor);
         forewardSensor->setChecked(manager->proximitySensor1<0);
         backwardSensor->setChecked(manager->proximitySensor2<0);
+
+        if(!manager->cameraConnected){
+            QUrl url = QUrl("http://"+ this->manager->ipAddress + ":"+QString::number(this->manager->cameraPortAddress)+"/?action=stream");
+            cameraView->load(url);
+            cameraView->show();
+            manager->cameraConnected = true;
+        }
     }
 }
 

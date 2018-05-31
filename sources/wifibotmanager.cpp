@@ -5,8 +5,6 @@ WifiBotManager::WifiBotManager(QObject *parent):
 {
     initStatements();
 
-    camera = new QNetworkAccessManager(this);
-
     timer = new QTimer();
     timer->setInterval(INTERVAL_SYNC);
     connect(timer, SIGNAL(timeout()), this, SLOT(tick()));
@@ -18,15 +16,15 @@ WifiBotManager::~WifiBotManager(){
 }
 
 void WifiBotManager::initStatements(){
-    batterySensor=0;
-    proximitySensor1 = 0;
-    proximitySensor2 = 0;
     this->resetStatements();
 }
 
 void WifiBotManager::resetStatements()
 {
     connected=false;
+    batterySensor=0;
+    proximitySensor1 = 0;
+    proximitySensor2 = 0;
     cameraConnected=false;
     moveForward=false;
     moveBackward=false;
@@ -41,7 +39,7 @@ void WifiBotManager::resetStatements()
     sendBuffer.clear();
 }
 
-bool WifiBotManager::connectTo(QString ipAddress, quint16 portAddress, qint16 cameraPortAddress){
+bool WifiBotManager::connectTo(QString ipAddress, quint16 portAddress, quint16 cameraPortAddress){
     qDebug()<<"Connection to "<< ipAddress << ':'<< portAddress;
     resetStatements();
     tcp.connectToHost(ipAddress, portAddress);
@@ -66,10 +64,13 @@ void WifiBotManager::disconnect(){
 
 void WifiBotManager::tick(){
     qDebug("Tick");
+    genMessage();
+    sendMessage();
+    recvMessage();
 }
 
 void WifiBotManager::genMessage(){
-    // If Camera is connected
+    /*// If Camera is connected
     if(camera){
         if(cameraTiltUp){
             QUrl url("http://"+ ipAddress +":" +cameraPortAddress+ "?"+PARAM_CAMERA_UP);
@@ -88,10 +89,11 @@ void WifiBotManager::genMessage(){
             camera->get(QNetworkRequest(url));
         }
     }
-
+    */
     sendBuffer.clear();
+    /*
     sendBuffer.append((char)0xff);
-    sendBuffer.append((char)0x07);
+    sendBuffer.append((char)0x09);
 
     if(moveForward){
         if(moveForward&& this->proximitySensor1 > 0){
@@ -161,9 +163,19 @@ void WifiBotManager::genMessage(){
         sendBuffer.append((char)0b01000000);
     else
         sendBuffer.append((char)0b01010000);
-    quint16 crc = this->crc16(sendBuffer, 1);
+        */
+
+    sendBuffer.append((char)0x09);
+    sendBuffer.append((char)0xff);
+    sendBuffer.append((char)0x00);
+    sendBuffer.append((char)0xff);
+    sendBuffer.append((char)0x00);
+    sendBuffer.append((char)0x50);
+    quint16 crc = qChecksum(sendBuffer.data(), sendBuffer.length());
     sendBuffer.append((char)crc);
-    sendBuffer.append((char)(crc>>8));
+    sendBuffer.append((char)crc>>8);
+    sendBuffer.prepend((char)0xff);
+
 }
 
 void WifiBotManager::sendMessage(){

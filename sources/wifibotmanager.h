@@ -32,11 +32,7 @@ private :
 
     // Connections
     QByteArray sendBuffer;
-    QString ipAddress;
-    QString portAddress;
-    QString cameraPortAddress;
 
-    bool cameraConnected;
     QTimer *timer;
 
 
@@ -49,6 +45,10 @@ public:
     // Connections
     QTcpSocket tcp;
     bool connected;
+    QString ipAddress;
+    quint16 portAddress;
+    quint16 cameraPortAddress;
+    bool cameraConnected;
 
     // Moves
     bool moveForward;
@@ -88,7 +88,7 @@ public:
      * @param cameraPortAddres
      * @return
      */
-    bool connectTo(QString ipAddress, quint16 portAddress, qint16 cameraPortAddress);
+    bool connectTo(QString ipAddress, quint16 portAddress, quint16 cameraPortAddress);
 
     /**
      * @brief WifiBotManager::disconnect

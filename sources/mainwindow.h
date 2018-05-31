@@ -10,6 +10,7 @@
 #include "wifibotmanager.h"
 #include "connectiondialog.h"
 #include "ui_mainwindow.h"
+#include <QtWebEngineWidgets>
 
 #define INTERVAL_SYNC 200
 
@@ -45,7 +46,7 @@ private:
     QProgressBar *battery;
     QRadioButton *forewardSensor;
     QRadioButton *backwardSensor;
-    //ViewerGl *videoWidget; //TODO : Add camera.h
+    QWebEngineView * cameraView;
 
     void resetMovesSatements();
     void initComponents();
