@@ -61,6 +61,7 @@ void MainWindow::initComponents()
 
     // Camera
     cameraView= new QWebEngineView();
+    cameraView->setZoomFactor(1.8);
 
     ui->frameLayout->addWidget(cameraView);
 
@@ -205,6 +206,7 @@ void MainWindow::syncData(){
      */
     // Moves
     manager->speed=ui->sliderSpeed->value();
+
     manager->moveForward=this->moveForward;
     manager->moveBackward=this->moveBackward;
     manager->moveRotationLeft=this->moveRotationLeft;
@@ -225,6 +227,8 @@ void MainWindow::syncData(){
         battery->setValue(manager->batterySensor);
         forewardSensor->setChecked(manager->proximitySensor1<0);
         backwardSensor->setChecked(manager->proximitySensor2<0);
+        this->ui->speedLeft->display(manager->speedSensorL);
+        this->ui->speedRight->display(manager->speedSensorR);
 
         if(!manager->cameraConnected){
             QUrl url = QUrl("http://"+ this->manager->ipAddress + ":"+QString::number(this->manager->cameraPortAddress)+"/?action=stream");

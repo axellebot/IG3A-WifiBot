@@ -184,6 +184,8 @@ void WifiBotManager::sendMessage(){
 void WifiBotManager::recvMessage(){
     char recvBuffer[21];
     tcp.read(recvBuffer, 21);
+    this->speedSensorL = ((recvBuffer[0]<<8) + recvBuffer[1]);
+    this->speedSensorR = ((recvBuffer[9]<<8) + recvBuffer[10]);
     this->batterySensor = (((unsigned int)((unsigned char)recvBuffer[2])) * 100.0 / 255.0);
     this->proximitySensor1 = (int) recvBuffer[3];
     this->proximitySensor2 = (int) recvBuffer[4];

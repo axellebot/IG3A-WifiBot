@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1089</width>
-    <height>541</height>
+    <width>1153</width>
+    <height>577</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -35,8 +35,8 @@
    <widget class="QWidget" name="gridLayoutWidget_2">
     <property name="geometry">
      <rect>
-      <x>740</x>
-      <y>280</y>
+      <x>80</x>
+      <y>70</y>
       <width>273</width>
       <height>156</height>
      </rect>
@@ -141,10 +141,10 @@
    <widget class="QWidget" name="gridLayoutWidget_4">
     <property name="geometry">
      <rect>
-      <x>720</x>
+      <x>410</x>
       <y>30</y>
-      <width>351</width>
-      <height>201</height>
+      <width>731</width>
+      <height>491</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout_4">
@@ -177,8 +177,8 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>351</width>
-          <height>171</height>
+          <width>731</width>
+          <height>461</height>
          </rect>
         </property>
         <layout class="QGridLayout" name="frameLayout"/>
@@ -360,6 +360,26 @@
      </item>
     </layout>
    </widget>
+   <widget class="QLCDNumber" name="speedLeft">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>450</y>
+      <width>121</width>
+      <height>23</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLCDNumber" name="speedRight">
+    <property name="geometry">
+     <rect>
+      <x>183</x>
+      <y>450</y>
+      <width>161</width>
+      <height>23</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QMenuBar" name="menuBar">
@@ -367,8 +387,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1089</width>
-     <height>20</height>
+     <width>1153</width>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuConnection">

@@ -68,6 +68,8 @@ public:
     quint16 batterySensor;
     int proximitySensor1;
     int proximitySensor2;
+    quint16 speedSensorR;
+    quint16 speedSensorL;
 
     WifiBotManager(QObject *parent=0);
     ~WifiBotManager();
