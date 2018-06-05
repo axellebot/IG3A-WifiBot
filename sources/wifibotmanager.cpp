@@ -97,12 +97,12 @@ void WifiBotManager::genMessage(){
     }
 
     sendBuffer.clear();
-    /*
+
     sendBuffer.append((char)0xff);
-    sendBuffer.append((char)0x09);
+    sendBuffer.append((char)0x07);
 
     if(moveForward){
-        if(moveForward&& this->proximitySensor1 > 0){
+        if(moveForward){
             if(moveRotationRight){
                 sendBuffer.append((char)speed);
                 sendBuffer.append((char)0x00);
@@ -123,7 +123,7 @@ void WifiBotManager::genMessage(){
             }
         }
     }
-    else if(moveBackward && this->proximitySensor2 > 0){
+    else if(moveBackward){
         if(moveRotationRight){
             sendBuffer.append((char)speed);
             sendBuffer.append((char)0x00);
@@ -169,19 +169,11 @@ void WifiBotManager::genMessage(){
         sendBuffer.append((char)0b01000000);
     else
         sendBuffer.append((char)0b01010000);
-        */
 
-    sendBuffer.append((char)255); // needed
-    sendBuffer.append((char)0x09);
-    sendBuffer.append((char)0xff);
-    sendBuffer.append((char)0x00);
-    sendBuffer.append((char)0xff);
-    sendBuffer.append((char)0x00);
-    sendBuffer.append((char)0x50);
-    quint16 crc = qChecksum(sendBuffer.data(), sendBuffer.length());
+    quint16 crc = crc16(sendBuffer ,sendBuffer.size());
     sendBuffer.append((char)crc);
-    sendBuffer.append((char)crc>>8);
-    sendBuffer.prepend((char)0xff);
+    sendBuffer.append((char)(crc>>8));
+
 }
 
 void WifiBotManager::sendMessage(){
@@ -197,19 +189,21 @@ void WifiBotManager::recvMessage(){
     this->proximitySensor2 = (int) recvBuffer[4];
 }
 
-quint16 WifiBotManager::crc16(QByteArray byteArray, int pos){
-    unsigned char *data = (unsigned char* )byteArray.constData();
-    quint16 crc = 0xFFFF;
-    quint16 Polynome = 0xA001;
-    quint16 Parity = 0;
-    for(; pos < byteArray.length(); pos++){
-        crc ^= *(data+pos);
-        for (unsigned int CptBit = 0; CptBit <= 7 ; CptBit++){
-            Parity= crc;
+quint16 WifiBotManager::crc16(QByteArray adresse_tab , unsigned char taille_max) {
+    unsigned int crc = 0xFFFF;
+    unsigned int polynome = 0xA001;
+    unsigned int cptOctet = 0;
+    unsigned int cptBit = 0;
+    unsigned int parity= 0;
+    crc = 0xFFFF;
+    polynome = 0xA001;
+    for( cptOctet= 1 ; cptOctet < taille_max ; cptOctet++) {
+        crc ^= (unsigned char)( adresse_tab[cptOctet]);
+        for( cptBit = 0; cptBit <= 7 ; cptBit++) {
+            parity= crc;
             crc >>= 1;
-            if (Parity%2 == true) crc ^= Polynome;
+            if(parity%2 == true) crc ^= polynome;
         }
     }
-    return crc;
+    return (crc);
 }
-

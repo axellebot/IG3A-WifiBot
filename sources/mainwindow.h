@@ -12,7 +12,7 @@
 #include "ui_mainwindow.h"
 #include <QtWebEngineWidgets>
 
-#define INTERVAL_SYNC 200
+#define INTERVAL_SYNC 75
 
 namespace Ui {
 class MainWindow;

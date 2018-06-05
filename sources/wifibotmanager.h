@@ -20,7 +20,7 @@ using namespace std;
 #define PARAM_CAMERA_LEFT "action=command&dest=0&plugin=0&id=10094852&group=1&value=200"
 #define PARAM_CAMERA_RIGHT "action=command&dest=0&plugin=0&id=10094852&group=1&value=-200"
 
-#define INTERVAL_SYNC 200
+#define INTERVAL_SYNC 75
 
 class WifiBotManager : public QObject
 {
@@ -102,7 +102,7 @@ public:
      * @param pos
      * @return
      */
-    quint16 crc16(QByteArray byteArray, int pos);
+    quint16 crc16(QByteArray adresse_tab , unsigned char taille_max);
 
 public slots :
     void tick();
