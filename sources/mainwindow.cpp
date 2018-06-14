@@ -66,6 +66,7 @@ void MainWindow::initComponents()
     ui->frameLayout->addWidget(cameraView);
 
     setInterfaceEnabled(false);
+
 }
 
 /** BUTTON CLICKED **/
@@ -229,7 +230,10 @@ void MainWindow::syncData(){
         backwardSensor->setChecked(manager->proximitySensor2<0);
         this->ui->speedLeft->display(manager->speedSensorL);
         this->ui->speedRight->display(manager->speedSensorR);
-
+        this->ui->odometryLeft->display(manager->odomL);
+        this->ui->odometryRight->display(manager->odomR);
+        this->ui->irL->display(manager->proximitySensor1);
+        this->ui->irR->display(manager->proximitySensor2);
         if(!manager->cameraConnected){
             QUrl url = QUrl("http://"+ this->manager->ipAddress + ":"+QString::number(this->manager->cameraPortAddress)+"/?action=stream");
             cameraView->load(url);

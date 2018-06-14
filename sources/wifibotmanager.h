@@ -70,6 +70,8 @@ public:
     int proximitySensor2;
     quint16 speedSensorR;
     quint16 speedSensorL;
+    float odomL;
+    float odomR;
 
     WifiBotManager(QObject *parent=0);
     ~WifiBotManager();
